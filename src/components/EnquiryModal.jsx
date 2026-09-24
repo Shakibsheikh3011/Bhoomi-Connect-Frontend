@@ -13,15 +13,15 @@ export default function EnquiryModal({ planTitle, onClose }) {
 
     try {
       await emailjs.send(
-        'service_4cu7br2',     // <-- apna Service ID daalo
-        'template_xh8clnq',    // apna Template ID
+        'service_4cu7br2',  
+        'template_xh8clnq',    
         {
           name: form.name,
           phone: form.phone,
           email: form.email,
           message: `Interested in: ${planTitle}\n\n${form.message}`,
         },
-        '1_0Nq-Zmle6UWRYKh'    // apna Public Key
+        '1_0Nq-Zmle6UWRYKh'   
       )
       setStatus('success')
     } catch (err) {

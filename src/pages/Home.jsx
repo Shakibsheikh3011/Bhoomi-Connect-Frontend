@@ -21,15 +21,15 @@ export default function Home() {
 
     try {
       await emailjs.send(
-        'service_abc123',
-        'template_xyz789',
+        'service_4cu7br2',     // <-- apna Service ID daalo
+        'template_xh8clnq',    // apna Template ID
         {
           name: form.name,
           phone: form.phone,
           email: form.email,
           message: form.message,
         },
-        'AbCdEfGhIjKlMnOp'
+        '1_0Nq-Zmle6UWRYKh'
       )
       setStatus('success')
       setForm({ name: '', phone: '', email: '', message: '' })
