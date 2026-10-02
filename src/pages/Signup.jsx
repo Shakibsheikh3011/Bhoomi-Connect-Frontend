@@ -28,11 +28,16 @@ export default function Signup() {
     setLoading(true)
     try {
       await API.post('/api/auth/register', form)
-      navigate('/login')
+      navigate('/login', {
+        state: {
+          message:
+            'Account created. If email verification is required, check your inbox, then log in.',
+        },
+      })
     } catch (err) {
       console.error(err)
       const data = err.response?.data?.data
-      if (data) {
+      if (data && typeof data === 'object') {
         setError(Object.values(data).join(', '))
       } else {
         setError(err.response?.data?.message || 'Signup failed. Try again.')
@@ -43,9 +48,15 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6 py-12" style={{ backgroundColor: '#F6F3ED' }}>
+    <div
+      className="min-h-[80vh] flex items-center justify-center px-6 py-12"
+      style={{ backgroundColor: '#F6F3ED' }}
+    >
       <div className="bg-white rounded-lg shadow-sm p-8 w-full max-w-sm">
-        <h1 style={{ fontFamily: 'var(--font-serif)', color: '#23262B' }} className="text-3xl mb-1">
+        <h1
+          style={{ fontFamily: 'var(--font-serif)', color: '#23262B' }}
+          className="text-3xl mb-1"
+        >
           Create account
         </h1>
         <p className="text-sm mb-6" style={{ color: '#8A877E' }}>
@@ -127,7 +138,7 @@ export default function Signup() {
             style={{ backgroundColor: '#2F4538' }}
             className="w-full text-white py-2.5 rounded-md text-sm font-medium hover:opacity-90 disabled:opacity-60"
           >
-            {loading ? 'Creating account...' : 'Create account'}
+            {loading ? 'Creating account... (first request can take up to a minute)' : 'Create account'}
           </button>
         </form>
 
